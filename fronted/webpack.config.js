@@ -2,7 +2,6 @@ const path = require('path')
 // const webpack = require('webpack')
 
 module.exports = {
-  mode: 'development',
   // エントリーポイントの設定。各モジュールを読み込んでメインの処理をするファイル
   entry: {
     application: './src/javascripts/components/messages/app.js',

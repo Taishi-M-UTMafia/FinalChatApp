@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class MyComponent extends React.Component {
+class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello! World.</h1>
-        <p>ぷりぷり</p>
+        <input onChange = {e => console.log(e.target.value)} />
       </div>
     );
   }
 }
 
-// TODO(Sunny): ここおかしいよ
+// TODO(Sunny): エラー文でたまま、なんでSetTimeOutしないと機能しないの？
 setTimeout(() => {
-  ReactDOM.render(<MyComponent />, document.querySelector('#main'));
+  ReactDOM.render(<App />, document.querySelector('#main'));
 }, 0)

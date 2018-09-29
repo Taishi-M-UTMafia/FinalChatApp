@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ReactTest</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'comment_box.js', 'data-turbolinks-track': 'reload' %>
+    <title>ReactChatApp</title>
+    <%= render ('layouts/rails_default') %>
   </head>
-
   <body>
     <%= yield %>
   </body>
