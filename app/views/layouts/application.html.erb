@@ -2,9 +2,11 @@
 <html>
   <head>
     <title>ReactChatApp</title>
-    <%= render ('layouts/rails_default') %>
+    <%= render 'layouts/rails_default' %>
   </head>
   <body>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/flash' %>
     <%= yield %>
   </body>
 </html>
