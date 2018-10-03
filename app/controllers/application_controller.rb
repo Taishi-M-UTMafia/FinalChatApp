@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   private
       def sign_in_required
           redirect_to new_user_session_url unless user_signed_in?
-          # TODO(Taishi): flashメッセージのUIをイブキに相談
           flash[:notice] = "You have to log in" unless user_signed_in?
       end
 

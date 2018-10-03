@@ -1,12 +1,14 @@
 <header>
-  <nav>
+  <div class="header-logo">
+    <%= link_to 'LINE', root_path %>
+  </div>
+  <ul class="header-menus">
     <% if user_signed_in? %>
-      <strong><%= link_to current_user.name, root_path  %></strong>
-      <%= link_to 'プロフィール変更', edit_user_registration_path %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
     <% else %>
-      <%= link_to 'サインアップ', new_user_registration_path %>
-      <%= link_to 'ログイン', new_user_session_path %>
+      <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+      <li><%= link_to 'ログイン', new_user_session_path %></li>
     <% end %>
-  </nav>
+  </ul>
 </header>

@@ -11,10 +11,6 @@
 
 /* universal */
 
-body {
-  padding-top: 10px;
-}
-
 section {
   overflow: auto;
 }
@@ -55,15 +51,11 @@ h2 {
 a {
   text-align: center;
 }
-/* forms */
 
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
+ul {
+  list-style: none;
 }
-
+/* forms */
 input {
   height: auto !important;
 }
@@ -80,4 +72,146 @@ input {
 
 .user-name {
   padding-left: 10px;
+}
+
+/* FriendList */
+.friend-list {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.03);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
+
+  &__item {
+    padding: 14px 10px 14px 15px;
+    border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
+    cursor: pointer;
+  }
+}
+
+/* MessageBox */
+.message-box {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  padding: 10px 30px 5px;
+  overflow-y: scroll;
+}
+
+.reply-box {
+  position:absolute;
+  right:0;
+  bottom:0;
+}
+
+header {
+  height: 60px;
+  z-index: 1;
+  width: 100%;
+  background-color: #2AADE5;
+}
+
+header a{
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.header-logo {
+  float: left;
+  padding-left: 20px;
+  color: white;
+  font-size: 22px;
+  line-height: 59px;
+}
+
+.header-logo a{
+  color: white;
+  font-size: 40px;
+}
+
+.header-menus {
+  float: right;
+  padding-right: 20px;
+}
+
+.header-menus li {
+  float: left;
+  line-height: 59px;
+  font-size: 13px;
+  color: white;
+  padding-left: 15px;
+  font-weight:bold;
+}
+
+.header-menus a {
+  float: left;
+  font-size: 20px;
+  color: white;
+  text-decoration:none;
+}
+
+.header-menus .fa {
+  padding-right: 5px;
+}
+
+.header-menus input[type="submit"] {
+  padding: 0 20px;
+  float: left;
+  line-height: 59px;
+  color: white;
+  margin: 0;
+  font-size: 13px;
+}
+.notice,.alert{
+  color:white;
+  text-align:center;
+  font-weight:bold;
+  background-color:orange;
+  margin:0;
+  height:40px;
+  line-height: 40px;
+  font-size:20px;
+}
+
+.reply-box {
+  background: rgba( 0, 0, 0, 0.05 );
+  border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+  padding: 14px 15px;
+  width: 100%;
+
+
+  &__input {
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid rgba( 0, 0, 0, 0.1 );
+    padding: 10px 15px;
+    font-size: 14px;
+    color: rgba( 0, 0, 0, 0.7 );
+    outline: 0;
+
+    &:focus + .reply-box__tip {
+      display: block;
+    }
+  }
+
+  &__tip {
+    display: none;
+    position: absolute;
+    top: 24px;
+    right: 27px;
+    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.4);
+
+    &__button {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      padding: 2px 3px;
+      margin: 0 3px;
+    }
+  }
 }
