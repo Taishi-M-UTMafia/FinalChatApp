@@ -7,5 +7,5 @@ class Message < ApplicationRecord
   # validates :message_type,  presence: true
   # validates :timestamp,     presence: true
 
-  # enum message_type: { text: 'text', image: 'image'}
+  enum message_type: { text: 'text', image: 'image'}
 end

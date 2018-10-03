@@ -4,6 +4,7 @@
   </div>
   <ul class="header-menus">
     <% if user_signed_in? %>
+      <li><%= link_to '友達検索', users_search_path %></li>
       <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
     <% else %>

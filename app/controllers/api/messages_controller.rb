@@ -1,6 +1,5 @@
 module Api
   class MessagesController < ApplicationController
-    protect_from_forgery :except => [:post_message]
     # before_action :open_chat_id_present?
 
     # def open_chat_id_present?
