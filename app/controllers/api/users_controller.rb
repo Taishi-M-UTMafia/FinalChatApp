@@ -1,7 +1,7 @@
 module Api
   class UsersController < ApplicationController
     def search
-      search_users = User.limit(5).where('name LIKE ?', "%#{params[:value]}%")#.where.not(id: current_user.id)
+      search_users = User.limit(5).where('name LIKE ?', "%#{params[:value]}%") #.where.not(id: current_user.id)
       render json: search_users
     end
 
