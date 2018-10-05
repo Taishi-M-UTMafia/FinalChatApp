@@ -10,14 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_03_020504) do
+ActiveRecord::Schema.define(version: 2018_10_05_044036) do
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "from_user_id"
+    t.integer "to_user_id"
+    t.integer "from_user_last_access"
+    t.integer "to_user_last_access"
+    t.string "id_combination"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.string "content"
-    t.string "from_user_id"
+    t.string "user_id"
     t.string "message_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "friendship_id"
+    t.integer "timestamp"
+    t.index ["friendship_id"], name: "index_messages_on_friendship_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,6 +44,7 @@ ActiveRecord::Schema.define(version: 2018_10_03_020504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

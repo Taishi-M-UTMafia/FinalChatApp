@@ -3,7 +3,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    root_path
+    users_search_path
+  end
+
+  def set_friendship_variable
+    @to_user = User.find_by(id: params[:to_user_id])
+    @id_combination = @to_user.id_combination_with current_user
+    @friendship = Friendship.find_by(id_combination: @id_combination)
   end
 
   private

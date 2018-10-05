@@ -1,8 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// TODO(Taishi): scssの整備
-
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -10,6 +8,12 @@
 }
 
 /* universal */
+* {
+  box-sizing: border-box;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
 section {
   overflow: auto;
@@ -54,6 +58,11 @@ a {
 
 ul {
   list-style: none;
+  padding:0;
+}
+
+li {
+  display: table;
 }
 /* forms */
 input {
@@ -287,4 +296,94 @@ header a{
 
 .search_user_list_result:hover{
   background-color: rgba(0,0,0,0.1);
+}
+
+.user-list {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  background: rgba( 0, 0, 0, 0.03 );
+  border-right: 1px solid rgba( 0, 0, 0, 0.1 );
+  padding: 0;
+
+  &__item {
+    padding: 14px 10px 14px 15px;
+    border-bottom: 1px solid rgba( 0, 0, 0, 0.1 );
+    cursor: pointer;
+    width: 100%;
+
+    &--new {
+      background: #EEF1F6;
+      font-weight: 500;
+
+      .user-list__item__icon {
+        color: #1D9BCE;
+        margin-right: 3px;
+      }
+    }
+
+    &--active {
+      background: #93C26D;
+      color: #fff;
+      font-weight: 500;
+      position: relative;
+      border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+      margin-top: -1px;
+      z-index: 10;
+
+      &:before {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 40px 0 40px 20px;
+        border-color: transparent transparent transparent #93C26D;
+        position: absolute;
+        display: block;
+        right: -20px;
+        top: 0;
+        content: " ";
+      }
+    }
+
+    &__picture {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      float: left;
+      img {
+        width: inherit;
+      }
+    }
+
+    &__name {
+      margin: 3px 0 0 0;
+      font-size: 16px;
+      font-weight: inherit;
+      width: 60%;
+    }
+
+    &__message {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      float: left;
+      display: block;
+      width: 60%;
+    }
+
+    &__timestamp {
+      font-size: 11px;
+      font-weight: inherit;
+      float: right;
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+
+    &__details {
+      float: left;
+      padding-left: 15px;
+    }
+  }
 }

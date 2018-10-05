@@ -1,0 +1,13 @@
+class CreateFriendships < ActiveRecord::Migration[5.2]
+  def change
+    create_table :friendships do |t|
+      t.integer :from_user_id
+      t.integer :to_user_id
+      t.integer :from_user_last_access
+      t.integer :to_user_last_access
+      t.string :id_combination
+
+      t.timestamps
+    end
+  end
+end
