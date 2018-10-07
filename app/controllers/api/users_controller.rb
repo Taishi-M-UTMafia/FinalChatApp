@@ -5,7 +5,7 @@ module Api
       render json: search_users
     end
 
-    def find_current_user
+    def fetch_current_user
       render json: current_user
     end
 

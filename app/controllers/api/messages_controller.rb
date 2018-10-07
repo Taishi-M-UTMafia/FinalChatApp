@@ -3,6 +3,7 @@ module Api
     before_action :set_friendship_variable
 
     def post_message
+      # TODO: lastAccessも更新
       new_message = Message.new(content: params[:content],
                                 user_id: current_user.id,
                                 friendship_id: @friendship.id,
@@ -22,7 +23,7 @@ module Api
       output_path  = Rails.root.join('public/message_images', path)
       new_image    = Message.new(content: path,
                                  user_id: current_user.id,
-                                 chat_room_id: chat_room_id(params[:open_chat_id]),
+                                 friendship_id: @friendship.id,
                                  message_type: "image",
                                  timestamp: Time.now.to_i)
 

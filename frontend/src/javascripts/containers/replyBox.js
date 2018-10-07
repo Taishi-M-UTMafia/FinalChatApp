@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { postMessage } from '../actions/action_messages'
+import { postMessage, postImage } from '../actions/action_messages'
 
 
 class ReplyBox extends Component {
@@ -18,7 +18,7 @@ class ReplyBox extends Component {
   }
 
   postImage(e) {
-    this.props.postImage(e.target.value[0])
+    this.props.postImage(this.props.openChatId, e.target.value[0])
   }
 
   updateValue(e) {
@@ -56,7 +56,7 @@ function mapStateToProps({ openChatId }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ postMessage },dispatch)
+  return bindActionCreators({ postMessage, postImage },dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReplyBox)

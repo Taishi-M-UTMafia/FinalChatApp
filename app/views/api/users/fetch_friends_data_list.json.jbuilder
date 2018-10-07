@@ -3,8 +3,13 @@ json.array! @friends do |friend|
 
   json.friend friend
   json.messages friendship.messages
-  json.last_access do
-    json.from_user friendship.from_user_last_access
-    json.to_user friendship.to_user_last_access
+  json.lastAccess do
+    if current_user.id == friendship.from_user_id
+      json.currentUser friendship.from_user_last_access
+      json.recipient friendship.to_user_last_access
+    elsif friend.id == friendship.from_user_id
+      json.currentUser friendship.to_user_last_access
+      json.recipient friendship.from_user_last_access
+    end
   end
 end

@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
-import ReplyBox from './replyBox';
+import _ from 'lodash'
+import classNames from 'classnames'
+import Utils from '../utils'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import _ from 'lodash'
+import ReplyBox from './replyBox';
 
 class MessageBox extends Component {
-  renderMessages(message) {
-    return (
-      <li key={message.id} className="message-box__item">
-        <div className="message-box__item__contents">
-          {message.content}
-        </div>
-      </li>
-    );
-  }
-
   render() {
-    if (this.props.friendsDataList === []) {
+    // データが返ってきてない時のエラー回避＆メッセージ表示
+    if (this.props.friendsDataList == ![]) {
       return <div className="col-xs-9 message-box">You can make friends at searchform!</div>
     }
     const friendData = _.find(this.props.friendsDataList, (data) => {return data.friend.id === this.props.openChatId})
@@ -26,10 +19,42 @@ class MessageBox extends Component {
     }
     const messages = friendData.messages
 
+    // メインのメッセージリスト
+    const renderMessages = messages.map((message) => {
+      const messageClasses = classNames({
+        'message-box__item': true,
+        'message-box__item--from-current': message.user_id === this.props.currentUser.id,
+      })
+
+      return (
+        <li key={message.id} className={ messageClasses }>
+          <div className="message-box__item__contents">
+            {message.content}
+          </div>
+        </li>
+      );
+    })
+
+    // 必要に応じて既読表示
+    const lastMessage = messages[messages.length - 1]
+    const lastAccess = friendData.lastAccess
+    if (lastMessage !== void 0 && lastMessage.user_id === this.props.currentUser.id) {
+      if (lastAccess !== void 0 && lastAccess.recipient >= lastMessage.timestamp) {
+        const date = Utils.getShortDate(lastMessage.timestamp)
+        renderMessages.push(
+          <li key='read' className='message-box__item message-box__item--read'>
+            <div className='message-box__item__contents'>
+              Read { date }
+            </div>
+          </li>
+        )
+      }
+    }
+
     return (
       <div className="col-xs-9 message-box">
         <ul className="message-box-list">
-          {messages.map(this.renderMessages)}
+          { renderMessages }
         </ul>
         <ReplyBox />
       </div>
@@ -37,11 +62,8 @@ class MessageBox extends Component {
   }
 }
 
-function mapStateToProps({openChatId, friendsDataList}) {
-  return { openChatId, friendsDataList };
+function mapStateToProps({openChatId, friendsDataList, currentUser}) {
+  return { openChatId, friendsDataList, currentUser };
 }
-
-// function mapDispatchToProps(dispatch) {
-// }
 
 export default connect(mapStateToProps)(MessageBox)

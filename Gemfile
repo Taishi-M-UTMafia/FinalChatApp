@@ -17,6 +17,7 @@ gem "jquery-rails"
 gem 'bootstrap-sass'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'foreman'
 
 group :development do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

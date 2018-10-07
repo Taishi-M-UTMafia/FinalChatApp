@@ -9,7 +9,7 @@ module Api
     end
 
     def destroy
-      @friendship.destroy and render json: []
+      @friendship.destroy and render json: @to_user
     end
 
     def update_last_access

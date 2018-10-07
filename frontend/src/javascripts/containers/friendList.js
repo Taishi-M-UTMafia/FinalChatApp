@@ -2,40 +2,67 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Utils from '../utils'
-import { fetchFriendsDataList } from '../actions/action_users'
+import classNames from 'classnames'
+import { fetchFriendsDataList, fetchCurrentUser } from '../actions/action_users'
 import { updateOpenChatId } from '../actions/action_messages'
+import { destroyFriendship, updateLastAccess } from '../actions/action_friendships'
 
 class FriendList extends Component {
   componentWillMount() {
     this.props.fetchFriendsDataList()
+    this.props.fetchCurrentUser()
   }
 
-  onClickUserListItem(id) {
-    this.props.updateOpenChatId(id)
+  onClickUserListItem(toUserId) {
+    this.props.updateLastAccess(toUserId)
+    this.props.updateOpenChatId(toUserId)
   }
 
+  onClickDestroyButton(toUserId) {
+    if (window.confirm('本当に友達解除しますか？')) this.props.destroyFriendship(toUserId)
+  }
+
+  // 友達リストを作成して返す
   renderFriendList(data) {
+    // date, isMessage, statusIconの設定
     const lastMessage = data.messages[data.messages.length - 1]
     var date
-    if (lastMessage !== void 0) date = Utils.getNiceDate(lastMessage.timestamp)
+    var isNewMessage = false
+    var statusIcon
+    if (lastMessage !== void 0) {
+      date = Utils.getNiceDate(lastMessage.timestamp)
+      if (data.lastAccess.currentUser < lastMessage.timestamp) {
+        isNewMessage = lastMessage.user_id === data.friend.id
+        statusIcon = <i className='fa fa-circle user-list__item__icon' />
+      }
+      if (lastMessage.user_id === this.props.currentUser.id) {
+        statusIcon = <i className='fa fa-reply user-list__item__icon' />
+      }
+    }
+
+    const itemClasses = classNames({
+        'user-list__item'        : true,
+        'user-list__item--new'   : isNewMessage,
+        'user-list__item--active': this.props.openChatId === data.friend.id,
+      })
 
     return(
       <li
         key = { data.friend.id }
-        className="user-list__item"
-        onClick = {this.onClickUserListItem.bind(this, data.friend.id)}
+        className={ itemClasses }
       >
         <div className = 'user-list__item__picture'><img src = { data.friend.image_name.url }/></div>
-        <div className = 'user-list__item__details'>
-          <h4 className = 'user-list__item__name'>
-            { data.friend.name }
-          </h4>
-          <p className='user-list__item__timestamp'>{ date }</p>
-          <span className = 'user-list__item__deletefriend'>
-            <div><i className = 'fas fa-times-circle'></i></div>
-          </span>
-          {lastMessage ? <span className='user-list__item__message'>{ lastMessage.content }</span> : null}
+        <div className = 'user-list__item__details' onClick = {this.onClickUserListItem.bind(this, data.friend.id)}>
+          <span className = 'user-list__item__name'>{ data.friend.name }</span>
+          <div><p className='user-list__item__timestamp'>{ date }</p></div>
+          {lastMessage ? <span className='user-list__item__message'>{ statusIcon } { lastMessage.content }</span> : null}
         </div>
+        <span
+          className = 'user-list__item__deletefriend'
+          onClick={this.onClickDestroyButton.bind(this, data.friend.id)}
+        >
+          <i className = 'fas fa-times-circle'></i>
+        </span>
       </li>
     );
   }
@@ -51,12 +78,14 @@ class FriendList extends Component {
   }
 }
 
-function mapStateToProps({ friendsDataList, openChatId }) {
-  return { friendsDataList, openChatId }
+function mapStateToProps({ friendsDataList, openChatId, currentUser }) {
+  return { friendsDataList, openChatId, currentUser }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchFriendsDataList, updateOpenChatId }, dispatch)
+  return bindActionCreators(
+    { fetchFriendsDataList, updateOpenChatId, fetchCurrentUser, updateLastAccess, destroyFriendship }
+  , dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendList)
