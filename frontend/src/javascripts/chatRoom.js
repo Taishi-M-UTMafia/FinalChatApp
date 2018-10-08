@@ -14,5 +14,5 @@ setTimeout(() => {
     <Provider store={createStoreWithMiddleware(reducers)}>
       <App />
     </Provider>
-    , document.querySelector('#main'));
+    , document.getElementById('main'));
 }, 100)

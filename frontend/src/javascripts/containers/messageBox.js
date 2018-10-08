@@ -14,7 +14,7 @@ class MessageBox extends Component {
     }
     const friendData = _.find(this.props.friendsDataList, (data) => {return data.friend.id === this.props.openChatId})
 
-    if (friendData === void 0) {
+    if (!friendData) {
       return <div className="col-xs-9 message-box">Click your friend to start chatting!</div>
     }
     const messages = friendData.messages
@@ -44,8 +44,8 @@ class MessageBox extends Component {
     // 必要に応じて既読表示
     const lastMessage = messages[messages.length - 1]
     const lastAccess = friendData.lastAccess
-    if (lastMessage !== void 0 && lastMessage.user_id === this.props.currentUser.id) {
-      if (lastAccess !== void 0 && lastAccess.recipient >= lastMessage.timestamp) {
+    if (lastMessage && lastMessage.user_id === this.props.currentUser.id) {
+      if (lastAccess && lastAccess.recipient >= lastMessage.timestamp) {
         const date = Utils.getShortDate(lastMessage.timestamp)
         renderMessages.push(
           <li key='read' className='message-box__item message-box__item--read'>

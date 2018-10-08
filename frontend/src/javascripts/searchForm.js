@@ -14,5 +14,5 @@ setTimeout(() => {
     <Provider store={createStoreWithMiddleware(reducers)}>
       <SearchForm />
     </Provider>
-    , document.querySelector('#search'));
+    , document.getElementById('search'));
 }, 100)

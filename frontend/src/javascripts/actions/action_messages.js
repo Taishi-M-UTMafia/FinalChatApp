@@ -1,12 +1,10 @@
 import axios from  'axios';
+import { actionTypes } from '../constants'
 axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content') // CSRF対策
-
-export const UPDATE_OPEN_CHAT_ID = 'UPDATE_OPEN_CHAT_ID';
-export const POST_MESSAGE_OR_IMAGE = 'POST_MESSAGE_OR_IMAGE';
 
 export function updateOpenChatId(newId) {
   return {
-    type: UPDATE_OPEN_CHAT_ID,
+    type: actionTypes.UPDATE_OPEN_CHAT_ID,
     newId
   }
 }
@@ -15,7 +13,7 @@ export function postMessage(toUserId, content) {
   return axios.post('/api/messages/post_message', { to_user_id: toUserId, content })
     .then(response => {
       return {
-        type: POST_MESSAGE_OR_IMAGE,
+        type: actionTypes.POST_MESSAGE_OR_IMAGE,
         newMessageData: response.data
       }
     })
@@ -29,7 +27,7 @@ export function postImage(toUserId, image) {
   return axios.post('/api/messages/post_image', { to_user_id: toUserId, imageFile})
     .then(response => {
       return {
-        type: POST_MESSAGE_OR_IMAGE,
+        type: actionTypes.POST_MESSAGE_OR_IMAGE,
         newMessageData: response.data
       }
     })

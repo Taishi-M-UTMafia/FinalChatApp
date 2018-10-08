@@ -1,8 +1,8 @@
-import { UPDATE_OPEN_CHAT_ID } from '../actions/action_messages'
+import { actionTypes } from '../constants'
 
 export default (state = null, action) => {
   switch(action.type) {
-    case UPDATE_OPEN_CHAT_ID:
+    case actionTypes.UPDATE_OPEN_CHAT_ID:
       return action.newId
   }
   return state

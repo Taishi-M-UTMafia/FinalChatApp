@@ -1,8 +1,6 @@
 import axios from  'axios';
+import { actionTypes } from '../constants'
 axios.defaults.headers['X-CSRF-TOKEN'] = $('meta[name=csrf-token]').attr('content')
-
-export const DESTROY_FRIENDSHIP ='DESTROY_FRIENDSHIP'
-export const UPDATE_LAST_ACCESS ='UPDATE_LAST_ACCESS'
 
 export function createFriendship(toUserId) {
   return axios.post('/api/friendships', { to_user_id: toUserId })
@@ -16,7 +14,7 @@ export function destroyFriendship(toUserId) {
   return axios.delete('/api/friendships', { data: { to_user_id: toUserId } })
     .then(response => {
       return {
-        type: DESTROY_FRIENDSHIP,
+        type: actionTypes.DESTROY_FRIENDSHIP,
         friendship: response.data
       }
     })
@@ -27,7 +25,7 @@ export function updateLastAccess(toUserId) {
   return axios.get('/api/friendships/update_last_access', { params: { to_user_id: toUserId} })
     .then(response => {
       return {
-        type: UPDATE_LAST_ACCESS,
+        type: actionTypes.UPDATE_LAST_ACCESS,
         updatedFriendData: response.data
       }
     })

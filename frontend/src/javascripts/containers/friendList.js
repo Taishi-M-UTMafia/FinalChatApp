@@ -29,7 +29,7 @@ class FriendList extends Component {
     let date
     let isNewMessage = false
     let statusIcon
-    if (lastMessage !== void 0) {
+    if (lastMessage) {
       date = Utils.getNiceDate(lastMessage.timestamp)
       if (data.lastAccess.currentUser < lastMessage.timestamp) {
         isNewMessage = lastMessage.user_id === data.friend.id

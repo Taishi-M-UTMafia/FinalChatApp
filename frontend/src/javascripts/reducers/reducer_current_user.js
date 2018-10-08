@@ -1,8 +1,8 @@
-import { FETCH_CURRENT_USER } from '../actions/action_users'
+import { actionTypes } from '../constants'
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case FETCH_CURRENT_USER:
+    case actionTypes.FETCH_CURRENT_USER:
       return action.currentUser
   }
   return state

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   get 'users/search'
 
-  # TODO: resourcesで置き換える(friendships/destroy/:idなど)
   namespace :api, { format: 'json' } do
     get 'messages/render_message'
     post 'messages/post_message' => 'messages#post_message'

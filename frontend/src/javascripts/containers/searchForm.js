@@ -18,7 +18,7 @@ class SearchForm extends Component {
 
   onClickUserName(userId) {
     this.props.createFriendship(userId)
-    location.href = 'http://localhost:3000'
+    location.href = '/'
   }
 
   renderSearchUsers(user) {
