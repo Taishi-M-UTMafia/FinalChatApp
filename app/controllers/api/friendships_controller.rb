@@ -18,7 +18,7 @@ module Api
       elsif params[:to_user_id].to_i === @friendship[:from_user_id]
         @friendship[:to_user_last_access] = Time.now.to_i
       end
-      @friendship.save and render json: @friendship
+      @friendship.save and render 'update_last_access', formats: 'json', handlers: 'jbuilder'
     end
   end
 end

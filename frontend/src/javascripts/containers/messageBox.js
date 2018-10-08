@@ -26,10 +26,16 @@ class MessageBox extends Component {
         'message-box__item--from-current': message.user_id === this.props.currentUser.id,
       })
 
+      // message_typeをtypeにリネーム
+      const isText = (message.message_type === 'text')
       return (
         <li key={message.id} className={ messageClasses }>
-          <div className="message-box__item__contents">
-            {message.content}
+          <div className = 'user-list__item__picture'>
+            <img className = 'icon_by_message' src = { friendData.friend.image_name.url }/>
+          </div>
+          <p>{ friendData.friend.name }</p>
+          <div className = 'message-box__item__contents'>
+            { isText ? <span>{ message.content }</span> : <img className = 'image_message' src = { 'message_images/' + message.content } /> }
           </div>
         </li>
       );

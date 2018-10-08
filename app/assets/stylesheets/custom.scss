@@ -69,6 +69,13 @@ input {
   height: auto !important;
 }
 
+.btn, .form-control {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
 .profile-img-wrapper {
   margin: 0 auto;
   width:50px;
@@ -77,6 +84,8 @@ input {
 
 .profile-img {
   border-radius: 50%;
+  height:100px;
+  width:100px;
 }
 
 .user-name {

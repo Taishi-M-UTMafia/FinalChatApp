@@ -26,9 +26,9 @@ class FriendList extends Component {
   renderFriendList(data) {
     // date, isMessage, statusIconの設定
     const lastMessage = data.messages[data.messages.length - 1]
-    var date
-    var isNewMessage = false
-    var statusIcon
+    let date
+    let isNewMessage = false
+    let statusIcon
     if (lastMessage !== void 0) {
       date = Utils.getNiceDate(lastMessage.timestamp)
       if (data.lastAccess.currentUser < lastMessage.timestamp) {
@@ -47,10 +47,7 @@ class FriendList extends Component {
       })
 
     return(
-      <li
-        key = { data.friend.id }
-        className={ itemClasses }
-      >
+      <li key = { data.friend.id } className={ itemClasses }>
         <div className = 'user-list__item__picture'><img src = { data.friend.image_name.url }/></div>
         <div className = 'user-list__item__details' onClick = {this.onClickUserListItem.bind(this, data.friend.id)}>
           <span className = 'user-list__item__name'>{ data.friend.name }</span>
@@ -68,6 +65,12 @@ class FriendList extends Component {
   }
 
   render() {
+    this.props.friendsDataList.sort((a, b) => {
+      if (b.messages[b.messages.length -1] && a.messages[a.messages.length -1]) {
+        return b.messages[b.messages.length -1].timestamp - a.messages[a.messages.length -1].timestamp
+      }
+    })
+
     return(
       <div className="col-xs-3 user-list">
         <ul className="user-list__list">

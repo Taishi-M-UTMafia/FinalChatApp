@@ -7,28 +7,30 @@ export const POST_MESSAGE_OR_IMAGE = 'POST_MESSAGE_OR_IMAGE';
 export function updateOpenChatId(newId) {
   return {
     type: UPDATE_OPEN_CHAT_ID,
-    payload: newId
+    newId
   }
 }
 
-// TODO: typeをImageと統合
 export function postMessage(toUserId, content) {
   return axios.post('/api/messages/post_message', { to_user_id: toUserId, content })
     .then(response => {
       return {
         type: POST_MESSAGE_OR_IMAGE,
-        payload: response
+        newMessageData: response.data
       }
     })
     .catch(error => alert(error))
 }
 
 export function postImage(toUserId, image) {
-  return axios.post('/api/messages/post_image', { to_user_id: toUserId, image})
+  let imageFile = new FormData()
+  imageFile.append('image', image)
+  debugger
+  return axios.post('/api/messages/post_image', { to_user_id: toUserId, imageFile})
     .then(response => {
       return {
         type: POST_MESSAGE_OR_IMAGE,
-        payload: response
+        newMessageData: response.data
       }
     })
     .catch(error => alert(error))

@@ -10,7 +10,7 @@ export function fetchUsers(value) {
     .then(response => {
       return{
         type: FETCH_USER,
-        payload: response
+        searchUser: response.data
       };
     })
     .catch(error => alert(error))
@@ -21,7 +21,7 @@ export function fetchCurrentUser() {
     .then(response => {
       return{
         type: FETCH_CURRENT_USER,
-        payload: response
+        currentUser: response.data
       }
     })
     .catch(error => alert(error))
@@ -32,7 +32,7 @@ export function fetchFriendsDataList() {
     .then(response => {
       return{
         type: FETCH_FRIENDS_DATA_LIST,
-        payload: response
+        friendsDataList: response.data
       };
     })
     .catch(error => alert(error))

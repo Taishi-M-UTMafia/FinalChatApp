@@ -14,8 +14,7 @@ class User < ApplicationRecord
     friends_of_from_user + friends_of_to_user
   end
 
-  #
-  def id_combination_with(current_user)
-    current_user.id > self.id.to_i ? "#{self.id.to_i}-#{current_user.id}": "#{current_user.id}-#{self.id.to_i}"
+  def id_combination_with user
+    user.id > self.id.to_i ? "#{self.id.to_i}-#{user.id}": "#{user.id}-#{self.id.to_i}"
   end
 end

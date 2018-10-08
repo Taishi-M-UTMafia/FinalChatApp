@@ -16,7 +16,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def default_url(*args)
     # alternative_images = %w(/default_images/ninjawanko.jpg /default_images/hitsujisennin.jpg /default_images/torizukin.jpg /default_images/babywanko.jpg)
     # alternative_images.sample
-    '/default_images/ninjawanko.jpeg'
+    '/default_images/ninjawanko.jpg'
   end
 
   # Process files as they are uploaded:

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { postMessage, postImage } from '../actions/action_messages'
+import { updateLastAccess } from '../actions/action_friendships'
 
 
 class ReplyBox extends Component {
@@ -10,19 +11,21 @@ class ReplyBox extends Component {
     this.state = { value: '' }
   }
 
+  updateValue(e) {
+    this.setState({value: e.target.value})
+  }
+
   postMessage(e) {
     if (e.keyCode === 13) {
       this.props.postMessage(this.props.openChatId, e.target.value)
+      this.props.updateLastAccess(this.props.openChatId)
       this.setState({ value: '' })
     }
   }
 
   postImage(e) {
-    this.props.postImage(this.props.openChatId, e.target.value[0])
-  }
-
-  updateValue(e) {
-    this.setState({value: e.target.value})
+    this.props.postImage(this.props.openChatId, e.target.files[0])
+    this.props.updateLastAccess(this.props.openChatId)
   }
 
   render() {
@@ -56,7 +59,7 @@ function mapStateToProps({ openChatId }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ postMessage, postImage },dispatch)
+  return bindActionCreators({ postMessage, postImage, updateLastAccess },dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReplyBox)
