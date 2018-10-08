@@ -18,14 +18,12 @@ class ReplyBox extends Component {
   postMessage(e) {
     if (e.keyCode === 13) {
       this.props.postMessage(this.props.openChatId, e.target.value)
-      this.props.updateLastAccess(this.props.openChatId)
       this.setState({ value: '' })
     }
   }
 
   postImage(e) {
     this.props.postImage(this.props.openChatId, e.target.files[0])
-    this.props.updateLastAccess(this.props.openChatId)
   }
 
   render() {

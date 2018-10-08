@@ -58,7 +58,7 @@ class MessageBox extends Component {
     }
 
     return (
-      <div className="col-xs-9 message-box">
+      <div className="message-box col-xs-9">
         <ul className="message-box-list">
           { renderMessages }
         </ul>

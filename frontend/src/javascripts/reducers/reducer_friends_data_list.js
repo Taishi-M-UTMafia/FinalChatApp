@@ -17,7 +17,6 @@ export default (state = [], action) => {
       friendDataToUpdate.messages.push(action.newMessageData.newMessage)
       return newDataList
 
-
     case DESTROY_FRIENDSHIP:
       _.remove(newDataList, newData => { return newData.friend.id === action.friendship.id })
       return newDataList
