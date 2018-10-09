@@ -10,4 +10,6 @@
     <%= render 'layouts/flash' %>
     <%= yield %>
   </body>
+  <!--  Webpackの出力先の読み込みはページの最後に行わないといけない？-->
+  <%= javascript_include_tag 'chatRoom.bundle.js', 'searchForm.bundle.js' %>
 </html>

@@ -92,6 +92,11 @@ input {
   padding-left: 10px;
 }
 
+.image_message {
+  height:250px;
+  width:250px;
+}
+
 /* FriendList */
 .friend-list {
   position: absolute;
@@ -182,6 +187,10 @@ input {
   position:absolute;
   right:0;
   bottom:0;
+}
+
+.btn-primary {
+  background-color: #5ae628;
 }
 
 header {

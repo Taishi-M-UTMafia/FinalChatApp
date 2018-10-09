@@ -11,7 +11,6 @@ module Api
       @new_message.save and render 'render_message', formats: 'json', handlers: 'jbuilder'
     end
 
-    # TODO: ストロングパラメータ
     def post_image
       posted_image = params[:image]
       path         = Time.now.to_i.to_s + posted_image.original_filename
@@ -19,7 +18,7 @@ module Api
       @new_message  = Message.new(content: path,
                                  user_id: current_user.id,
                                  friendship_id: @friendship.id,
-                                 message_type: "image",
+                                 message_type: 'image',
                                  timestamp: Time.now.to_i)
 
       File.open(output_path, 'w+b') { |fp| fp.write  posted_image.tempfile.read }

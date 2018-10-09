@@ -9,10 +9,8 @@ import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
-setTimeout(() => {
-  ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
-      <SearchForm />
-    </Provider>
-    , document.getElementById('search'));
-}, 100)
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <SearchForm />
+  </Provider>
+  , document.getElementById('search'));

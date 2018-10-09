@@ -16,20 +16,22 @@ export function postMessage(toUserId, content) {
         type: actionTypes.POST_MESSAGE_OR_IMAGE,
         newMessageData: response.data
       }
-    })
-    .catch(error => alert(error))
+    }).catch(error => alert(error))
 }
 
 export function postImage(toUserId, image) {
   let imageFile = new FormData()
-  imageFile.append('image', image)
-  debugger
-  return axios.post('/api/messages/post_image', { to_user_id: toUserId, imageFile})
-    .then(response => {
+  imageFile.append('image', image, image.name)
+  imageFile.append('to_user_id', toUserId)
+  return axios({
+    method: 'post',
+    url: '/api/messages/post_image',
+    data: imageFile,
+    headers: {'Content-Type': 'multipart/form-data' },
+  }).then(response => {
       return {
         type: actionTypes.POST_MESSAGE_OR_IMAGE,
         newMessageData: response.data
       }
-    })
-    .catch(error => alert(error))
+    }).catch(error => alert(error))
 }
